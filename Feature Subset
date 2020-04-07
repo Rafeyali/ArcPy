@@ -1,0 +1,14 @@
+import arcpy, os
+
+fc = r'E:\Rafey\NNS project\NNS_Final20200330.gdb\Prov1_al_SJ'
+
+outws = r'E:\Rafey\NNS project\NNS_Final20200330.gdb'
+
+# Make a layer from the feature class
+arcpy.MakeFeatureLayer_management(fc, "fc_lyr")
+
+# Use a SQL query to select QUERY
+arcpy.SelectLayerByAttribute_management("fc_lyr", "", ' Random_Points_Filter Is Null ')
+
+# Write the selected features to a new feature class
+arcpy.CopyFeatures_management("fc_lyr", os.path.join(outws, "fc_out"))
